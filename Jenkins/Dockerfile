@@ -11,8 +11,8 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 USER jenkins
 
 # installing specific list of plugins. see: https://github.com/jenkinsci/docker#preinstalling-plugins
-#COPY plugins.txt /usr/share/jenkins/plugins.txt
-#RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 
 
 ############################################
@@ -20,7 +20,10 @@ USER jenkins
 ############################################
 
 # Jenkins defaut settings
-#COPY config/config.xml /usr/share/jenkins/ref/config.xml
+COPY config/config.xml /usr/share/jenkins/ref/config.xml
+
+#Jenkins user configuration
+COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 
 ############################################
 # Configure Jenkins Jobs
