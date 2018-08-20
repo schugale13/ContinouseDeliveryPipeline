@@ -11,7 +11,7 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 USER jenkins
 
 # installing specific list of plugins. see: https://github.com/jenkinsci/docker#preinstalling-plugins
-COPY plugins.txt /usr/share/jenkins/plugins.txt
+COPY Plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 
 
@@ -28,3 +28,6 @@ COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 ############################################
 # Configure Jenkins Jobs
 ############################################
+
+# Adding the specific config for the PSE Project Job
+COPY jobs/PSEProject/config.xml /usr/share/jenkins/ref/jobs/PSEProject/config.xml

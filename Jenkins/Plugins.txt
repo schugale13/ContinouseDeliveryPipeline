@@ -14,7 +14,7 @@ workflow-scm-step:2.6
 scm-api:2.2.7
 workflow-api:2.29
 workflow-support:2.20
-roovy-(workflow-cps:2.54
+workflow-cps:2.54
 pipeline-input-step:2.8
 pipeline-stage-step:2.3
 workflow-job:2.24
