@@ -19,7 +19,10 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 # Configure Jenkins
 ############################################
 
-# Jenkins defaut settings
+# Jenkins Settings, i.e. Maven, 
+COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
+
+# Jenkins default settings
 COPY config/config.xml /usr/share/jenkins/ref/config.xml
 
 #Jenkins user configuration
