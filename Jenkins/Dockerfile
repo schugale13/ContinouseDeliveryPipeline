@@ -10,20 +10,20 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 USER jenkins
 
-# installing specific list of plugins. see: https://github.com/jenkinsci/docker#preinstalling-plugins
-COPY Plugins.txt /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
-
 
 ############################################
 # Configure Jenkins
 ############################################
 
+# Disable the setup wizard
+ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+# installing specific list of plugins. see: https://github.com/jenkinsci/docker#preinstalling-plugins
+COPY Plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
+
 # Jenkins Settings, i.e. Maven, 
 COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
-
-# Jenkins default settings
-COPY config/config.xml /usr/share/jenkins/ref/config.xml
 
 #Jenkins user configuration
 COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
@@ -33,9 +33,12 @@ COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 ############################################
 
 # Adding the specific config for the PSE Project Job in xml 
-COPY jobs/PSEProject/config.xml /usr/share/jenkins/ref/jobs/PSEProject/config.xml
+#COPY jobs/PSEProject/config.xml /usr/share/jenkins/ref/jobs/PSEProject/config.xml
 
 
 #better to do this with groovy scripts that can be checked into a repo
+# Copy seed job
+COPY jobs/*.groovy /usr/share/jenkins/ref/init.groovy.d/
+
 # Copy job generation scripts
-#COPY jobs/job-dsl/ /usr/share/jenkins/ref/init.groovy.d/job-dsl/
+COPY job-dsl/*.groovy /usr/share/jenkins/ref/init.groovy.d/job-dsl/
