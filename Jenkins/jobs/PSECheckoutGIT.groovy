@@ -1,5 +1,5 @@
 String basePath = 'PSEProject'
-String repo = 'https://github.com/schugale13/PSE-Project2017.git'
+String repo = 'schugale13/PSE-Project2017'
 
 folder(basePath) {
     description 'This Jobs are Running all PSE Project Jobs'
