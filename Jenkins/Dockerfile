@@ -32,13 +32,8 @@ COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 # Configure Jenkins Jobs
 ############################################
 
-# Adding the specific config for the PSE Project Job in xml 
-#COPY jobs/PSEProject/config.xml /usr/share/jenkins/ref/jobs/PSEProject/config.xml
-
-
-#better to do this with groovy scripts that can be checked into a repo
-# Copy seed job
-COPY jobs/*.groovy /usr/share/jenkins/ref/init.groovy.d/
+# Adding the specific config for the PSE Project Seed Job in xml
+COPY jobs/PSEProjectSeeder/config.xml /usr/share/jenkins/ref/jobs/PSEProjectSeeder/config.xml
 
 # Copy job generation scripts
-#COPY jobs/job-dsl/*.groovy /usr/share/jenkins/ref/init.groovy.d/job-dsl/
+COPY jobs/*.groovy /usr/share/jenkins/ref/init.groovy.d/

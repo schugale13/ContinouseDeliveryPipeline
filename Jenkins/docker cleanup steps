@@ -7,3 +7,8 @@ docker rm $(docker ps -a -q)
 #Delete all images
 docker rmi $(docker images -q)
 
+#Install and Run Jenkins
+docker build -t jenkins_cd .
+
+docker run -d -p=8081:8080 jenkins_cd
+
