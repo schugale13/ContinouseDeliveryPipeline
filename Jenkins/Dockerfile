@@ -41,4 +41,4 @@ COPY user/security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 COPY jobs/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # Copy job generation scripts
-COPY jobs/job-dsl/*.groovy /usr/share/jenkins/ref/init.groovy.d/job-dsl/
+#COPY jobs/job-dsl/*.groovy /usr/share/jenkins/ref/init.groovy.d/job-dsl/
