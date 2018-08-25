@@ -13,6 +13,11 @@ job("$basePath/Maven-PSE-build") {
         scm 'H/5 * * * *'
     }
     steps {
-        maven('clean package')
+        maven {
+            mavenInstallation('Maven 3.1.1')
+            maven('clean package')
+        }
+
+
     }
 }
