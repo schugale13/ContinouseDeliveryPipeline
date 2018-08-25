@@ -13,9 +13,9 @@ job("$basePath/Maven-PSE-build") {
         scm 'H/5 * * * *'
     }
     steps {
-        maven('clean package')
         maven {
             mavenInstallation('Maven 3.3.3')
+            goals('clean package')
          }
 
 
