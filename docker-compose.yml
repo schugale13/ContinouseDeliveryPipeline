@@ -1,0 +1,25 @@
+version: '3'
+
+networks:
+  prodnetwork:
+    driver: bridge
+
+services:
+  nexus:
+    build: ./Nexus
+    restart: always
+    ports:
+    - "8082:8081"
+    networks:
+    - prodnetwork
+  jenkins:
+    build: ./Jenkins
+    restart: always
+    ports:
+    - "8081:8080"
+    networks:
+    - prodnetwork
+    depends_on:
+    - nexus
+    environment:
+    - NEXUS_PORT=8082

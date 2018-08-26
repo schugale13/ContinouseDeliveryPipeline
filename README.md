@@ -18,3 +18,5 @@ docker run -d -p=8081:8080 jenkins_cd
 #install and run Nexus (alone)
 
 # build and run Docker Compose (full CD Stack) 
+docker-compose up
+
