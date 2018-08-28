@@ -28,5 +28,7 @@ docker build -t LiveServer .
 docker run -d -p=8080:8000 LiveServer
 
 # build and run Docker Compose (full CD Stack) 
+docker-compose build
+
 docker-compose up
 
