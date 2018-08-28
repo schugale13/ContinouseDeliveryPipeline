@@ -15,10 +15,28 @@ job("$basePath/Maven-PSE-build") {
     steps {
         maven {
             mavenInstallation('Maven 3.3.3')
-            goals('clean package')
+            goals('clean')
+            goals('package')
          }
 
 
     }
 }
 
+job("$basePath/Maven-PSE-Documentation") {
+    scm {
+        github repo
+    }
+    triggers {
+        scm 'H/5 * * * *'
+    }
+    steps {
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('site')
+        }
+
+
+    }
+}
