@@ -8,7 +8,8 @@ import jenkins.model.GlobalConfiguration
 
  
 def instance = Jenkins.getInstance()
- 
+
+//Setting security settings
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 hudsonRealm.createAccount("admin", "admin")
 instance.setSecurityRealm(hudsonRealm)
@@ -22,3 +23,8 @@ Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKi
 // disable Job DSL script approval
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
+
+// limit the numbers of executers to 1
+Hudson hudson = Hudson.getInstance()
+hudson.setNumExecutors(1)
+hudson.save()
