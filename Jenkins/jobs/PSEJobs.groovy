@@ -47,7 +47,8 @@ job("$basePath/Maven-PSE-build") {
     }
 }
 
-//Maven Relese to Nexus
+
+//publish war file to nexus for testing
 
 job("$basePath/Maven-PSE-build-Release") {
     scm {
@@ -59,8 +60,14 @@ job("$basePath/Maven-PSE-build-Release") {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
             goals('versions:set')
-            goals('deploy')
-            
+
+        }
+        maven1 {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('deploy -Dmaven.test.skip=true')
+
+
 
         }
         //TODO: auswertung der Unit tests schön darstellen
