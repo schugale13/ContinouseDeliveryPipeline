@@ -27,6 +27,8 @@ COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
 
 #Jenkins config such as user configuration
 COPY config/jenkinsconfig.groovy /usr/share/jenkins/ref/init.groovy.d/jenkinsconfig.groovy
+#defalut credentials (for nexus)
+COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
 
 ############################################
 # Configure Jenkins Jobs
