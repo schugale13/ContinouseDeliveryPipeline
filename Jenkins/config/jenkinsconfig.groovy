@@ -13,7 +13,10 @@ def instance = Jenkins.getInstance()
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 hudsonRealm.createAccount("admin", "admin")
 instance.setSecurityRealm(hudsonRealm)
- 
+
+// limit the numbers of executers to 1
+instance.setNumExecutors(1)
+
 def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
 instance.setAuthorizationStrategy(strategy)
 instance.save()
@@ -24,7 +27,3 @@ Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKi
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
 
-// limit the numbers of executers to 1
-Hudson hudson = Hudson.getInstance()
-hudson.setNumExecutors(1)
-hudson.save()

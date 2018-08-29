@@ -11,7 +11,6 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 
 
-
 #Install and Run Jenkins (alone)
 docker build -t jenkins_cd .
 
