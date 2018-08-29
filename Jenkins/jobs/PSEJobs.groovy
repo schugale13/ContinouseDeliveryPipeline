@@ -59,7 +59,7 @@ job("$basePath/Maven-PSE-build-Release") {
         maven {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
-            goals('versions:set')
+            goals('versions:set -DnewVersion=$BUILD_NUMBER-forUITests')
 
         }
         maven {
