@@ -22,4 +22,4 @@ services:
     depends_on:
     - nexus
     environment:
-    - NEXUS_PORT=8081
+    - NEXUS_PORT=8082
