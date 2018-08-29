@@ -12,7 +12,7 @@ job("$basePath/Maven-PSE-Documentation") {
         github repo
     }
     triggers {
-        scm 'H/15 * * * *'
+        //scm 'H/15 * * * *'
     }
     steps {
         maven {
@@ -33,7 +33,7 @@ job("$basePath/Maven-PSE-build") {
         github repo
     }
     triggers {
-        scm 'H/15 * * * *'
+        //scm 'H/15 * * * *'
     }
     steps {
         maven {
