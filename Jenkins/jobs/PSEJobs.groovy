@@ -62,7 +62,7 @@ job("$basePath/Maven-PSE-build-Release") {
             goals('versions:set')
 
         }
-        maven1 {
+        maven {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
             goals('deploy -Dmaven.test.skip=true')
