@@ -49,7 +49,7 @@ job("$basePath/Maven-PSE-build") {
 
 //Maven Relese to Nexus
 
-job("$basePath/Maven-PSE-build") {
+job("$basePath/Maven-PSE-build-Release") {
     scm {
         github repo
     }
