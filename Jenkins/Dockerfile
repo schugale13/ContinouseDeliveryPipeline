@@ -24,7 +24,7 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 
 # Jenkins Settings, i.e. Maven, 
 COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
-COPY config/mavensettings.xml /usr/share/jenkins/.m2/settings.xml
+COPY config/mavensettings.xml /var/jenkins_home/.m2/settings.xml
 
 #Jenkins config such as user configuration
 COPY config/jenkinsconfig.groovy /usr/share/jenkins/ref/init.groovy.d/jenkinsconfig.groovy
