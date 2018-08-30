@@ -144,10 +144,15 @@ node {
     def mvnHome
     stage('Preparation') {
         github repo
-        mvnHome = tool 'M3'
     }
     stage('Build') {
-            sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+           description 'This Job builds the application and does the Unit Testing.'
+
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean package')
+         }
+    }
 
     }
     stage('Results') {
@@ -155,6 +160,7 @@ node {
         archive 'target/*.jar'
     }
     stage('Publish') {
+            archiveJunit('**/target/surefire-reports/*.xml')
        }
 }
       """.stripIndent())
