@@ -20,7 +20,7 @@ job("$basePath/Maven-PSE-Documentation") {
             goals('clean')
             goals('site')
         }
-
+//TODO: Javadoc mit generieren lassen
 
     }
 
@@ -50,7 +50,7 @@ job("$basePath/Maven-PSE-build") {
 
 //publish war file to nexus for testing
 
-job("$basePath/Maven-PSE-build-Release") {
+job("$basePath/Maven-PSE-build-Release for TestEnvironment") {
     scm {
         github repo
     }
@@ -70,9 +70,81 @@ job("$basePath/Maven-PSE-build-Release") {
 
 
         }
-        //TODO: auswertung der Unit tests schön darstellen
+
 
 
 
     }
+}
+
+//publish war file to nexus for Preprod
+
+job("$basePath/Maven-PSE-build-Release for PreProd") {
+    scm {
+        github repo
+    }
+
+    steps {
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('versions:set -DnewVersion=$BUILD_NUMBER-forUITests')
+
+        }
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('deploy -Dmaven.test.skip=true')
+
+
+
+        }
+
+
+
+
+    }
+}
+//publish war file to nexus for Production
+
+job("$basePath/Maven-PSE-build-Release for Live System") {
+    scm {
+        github repo
+    }
+
+    steps {
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('versions:set -DnewVersion=$BUILD_NUMBER-forUITests')
+
+        }
+        maven {
+            mavenInstallation('Maven 3.3.3')
+            goals('clean')
+            goals('deploy -Dmaven.test.skip=true')
+
+
+
+        }
+
+
+
+
+    }
+}
+
+//Build a pipeline View with all the Jobs
+buildPipelineView('project-PSE') {
+    filterBuildQueue()
+    filterExecutors()
+    title('PSE CD Pipeline')
+    displayedBuilds(5)
+    selectedJob('$basePath/Maven-PSE-Documentation')
+    selectedJob('$basePath/Maven-PSE-build')
+    selectedJob('$basePath/Maven-PSE-build-Release for TestEnvironment')
+    selectedJob('$basePath/Maven-PSE-build-Release for PreProd')
+    alwaysAllowManualTrigger()
+    showPipelineParameters()
+    refreshFrequency(60)
 }
