@@ -5,6 +5,13 @@ folder(basePath) {
     description 'This Jobs are Running all PSE Project Jobs'
 }
 
+pipelineJob('Pipeline') {
+    definition {
+        cps {
+            sandbox()
+            script("""
+
+
 //Does the Docu Job--also java doc ??
 
 job("$basePath/Maven-PSE-Documentation") {
@@ -134,17 +141,8 @@ job("$basePath/Maven-PSE-build-Release for Live System") {
     }
 }
 
-//Build a pipeline View with all the Jobs
-buildPipelineView('project-PSE') {
-    filterBuildQueue()
-    filterExecutors()
-    title('PSE CD Pipeline')
-    displayedBuilds(5)
-    selectedJob('Maven-PSE-Documentation')
-    selectedJob('Maven-PSE-build')
-    selectedJob('Maven-PSE-build-Release for TestEnvironment')
-    selectedJob('Maven-PSE-build-Release for PreProd')
-    alwaysAllowManualTrigger()
-    showPipelineParameters()
-    refreshFrequency(60)
+ 
+      """.stripIndent())
+        }
+    }
 }
