@@ -75,7 +75,7 @@ job("$basePath/03_Maven-PSE-build-Release for TestEnvironment") {
             goals('deploy -Dmaven.test.skip=true')
 
         }
-        
+
 
 
     }
@@ -135,4 +135,8 @@ job("$basePath/05_Maven-PSE-build-Release for Live System") {
 
 
     }
+}
+
+job('example-1') {
+    deliveryPipelineConfiguration('01_Maven-PSE-Documentation"')
 }

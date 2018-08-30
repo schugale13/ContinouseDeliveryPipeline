@@ -19,11 +19,11 @@ instance.setNumExecutors(1)
 
 def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
 instance.setAuthorizationStrategy(strategy)
-instance.save()
- 
+
 Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKillSwitch(false)
 
 // disable Job DSL script approval
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
 GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
 
+instance.save()
