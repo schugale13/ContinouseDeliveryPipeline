@@ -135,36 +135,3 @@ job("$basePath/05_Maven-PSE-build-Release for Live System") {
     }
 }
 
-pipelineJob('PipelineJobtest') {
-    definition {
-        cps {
-            sandbox()
-            script("""
-node {
-    def mvnHome
-    stage('Preparation') {
-        github repo
-    }
-    stage('Build') {
-           description 'This Job builds the application and does the Unit Testing.'
-
-        maven {
-            mavenInstallation('Maven 3.3.3')
-            goals('clean package')
-         }
-    }
-
-    }
-    stage('Results') {
-        junit '**/target/surefire-reports/TEST-*.xml'
-        archive 'target/*.jar'
-    }
-    stage('Publish') {
-            archiveJunit('**/target/surefire-reports/*.xml')
-       }
-}
-      """.stripIndent())
-        }
-    }
-}
-
