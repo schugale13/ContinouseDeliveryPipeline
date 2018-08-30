@@ -5,13 +5,6 @@ folder(basePath) {
     description 'This Jobs are Running all PSE Project Jobs'
 }
 
-pipelineJob('Pipeline') {
-    definition {
-        cps {
-            sandbox()
-            script("""
-
-
 //Does the Docu Job--also java doc ??
 
 job("$basePath/Maven-PSE-Documentation") {
@@ -138,11 +131,5 @@ job("$basePath/Maven-PSE-build-Release for Live System") {
 
 
 
-    }
-}
-
- 
-      """.stripIndent())
-        }
     }
 }
