@@ -10,6 +10,7 @@ folder(basePath) {
 //Does the Docu Job--also java doc ??
 
 job("$basePath/01_Maven-PSE-Documentation") {
+    description 'This Job generates documentation From the Pom File'
     scm {
         github repo
     }
@@ -31,6 +32,7 @@ job("$basePath/01_Maven-PSE-Documentation") {
 //Maven Package (inkl unit tests)
 
 job("$basePath/02_Maven-PSE-build") {
+    description 'This Job gbuilds the application and does the Unit Testing.'
     scm {
         github repo
     }
@@ -42,10 +44,12 @@ job("$basePath/02_Maven-PSE-build") {
             mavenInstallation('Maven 3.3.3')
             goals('clean package')
          }
+
+        publishers {
+            archiveJunit('**/target/surefire-reports/*.xml')
+        }
         //TODO: auswertung der Unit tests schön darstellen
-
-
-
+        //TODO: analyse mit sonarqube einbauen ??
     }
 }
 
@@ -53,6 +57,7 @@ job("$basePath/02_Maven-PSE-build") {
 //publish war file to nexus for testing
 
 job("$basePath/03_Maven-PSE-build-Release for TestEnvironment") {
+    description 'This Job skip testing to upload a snapshot to nexus-for further testing '
     scm {
         github repo
     }
@@ -70,8 +75,7 @@ job("$basePath/03_Maven-PSE-build-Release for TestEnvironment") {
             goals('deploy -Dmaven.test.skip=true')
 
         }
-
-
+        
 
 
     }
