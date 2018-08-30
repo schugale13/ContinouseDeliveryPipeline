@@ -5,21 +5,11 @@ folder(basePath) {
     description 'This Jobs are Running all PSE Project Jobs'
 }
 
-buildPipelineView('project-A') {
-    filterBuildQueue()
-    filterExecutors()
-    title('Project A CI Pipeline')
-    displayedBuilds(5)
-    selectedJob('project-A-compile')
-    alwaysAllowManualTrigger()
-    showPipelineParameters()
-    refreshFrequency(60)
-}
 
 
 //Does the Docu Job--also java doc ??
 
-job("$basePath/Maven-PSE-Documentation") {
+job("$basePath/01_Maven-PSE-Documentation") {
     scm {
         github repo
     }
@@ -40,7 +30,7 @@ job("$basePath/Maven-PSE-Documentation") {
 
 //Maven Package (inkl unit tests)
 
-job("$basePath/Maven-PSE-build") {
+job("$basePath/02_Maven-PSE-build") {
     scm {
         github repo
     }
@@ -62,7 +52,7 @@ job("$basePath/Maven-PSE-build") {
 
 //publish war file to nexus for testing
 
-job("$basePath/Maven-PSE-build-Release for TestEnvironment") {
+job("$basePath/03_Maven-PSE-build-Release for TestEnvironment") {
     scm {
         github repo
     }
@@ -79,8 +69,6 @@ job("$basePath/Maven-PSE-build-Release for TestEnvironment") {
             goals('clean')
             goals('deploy -Dmaven.test.skip=true')
 
-
-
         }
 
 
@@ -91,7 +79,7 @@ job("$basePath/Maven-PSE-build-Release for TestEnvironment") {
 
 //publish war file to nexus for Preprod
 
-job("$basePath/Maven-PSE-build-Release for PreProd") {
+job("$basePath/04_Maven-PSE-build-Release for PreProd") {
     scm {
         github repo
     }
@@ -100,7 +88,7 @@ job("$basePath/Maven-PSE-build-Release for PreProd") {
         maven {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
-            goals('versions:set -DnewVersion=$BUILD_NUMBER-forUITests')
+            goals('versions:set -DnewVersion=$BUILD_NUMBER-Preprod')
 
         }
         maven {
@@ -119,7 +107,7 @@ job("$basePath/Maven-PSE-build-Release for PreProd") {
 }
 //publish war file to nexus for Production
 
-job("$basePath/Maven-PSE-build-Release for Live System") {
+job("$basePath/05_Maven-PSE-build-Release for Live System") {
     scm {
         github repo
     }
@@ -128,14 +116,13 @@ job("$basePath/Maven-PSE-build-Release for Live System") {
         maven {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
-            goals('versions:set -DnewVersion=$BUILD_NUMBER-forUITests')
+            goals('versions:set -DnewVersion=$BUILD_NUMBER-Prod')
 
         }
         maven {
             mavenInstallation('Maven 3.3.3')
             goals('clean')
             goals('deploy -Dmaven.test.skip=true')
-
 
 
         }
