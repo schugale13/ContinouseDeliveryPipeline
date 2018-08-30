@@ -49,7 +49,7 @@ job("$basePath/02_Maven-PSE-build") {
             archiveJunit('**/target/surefire-reports/*.xml')
         }
         //TODO: auswertung der Unit tests schön darstellen
-        //TODO: analyse mit sonarqube einbauen ??
+        //TODO: analyse mit sonarqube einbauen alle statischen codeanalysen publishen
     }
 }
 

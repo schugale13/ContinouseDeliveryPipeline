@@ -4,7 +4,7 @@
                       https://maven.apache.org/xsd/settings-1.0.0.xsd">
     <servers>
         <server>
-            <id>nexus-server</id>
+            <id>artifact-repository</id>
             <username>admin</username>
             <password>admin123</password>
             <filePermissions>664</filePermissions>

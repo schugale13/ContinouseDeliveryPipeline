@@ -8,6 +8,7 @@ RUN apt-get update \
       && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
+
 USER jenkins
 
 
@@ -24,7 +25,8 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 
 # Jenkins Settings, i.e. Maven, 
 COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
-COPY config/mavensettings.xml /var/jenkins_home/.m2/settings.xml
+COPY --chown=jenkins:jenkins config/mavensettings.xml /var/jenkins_home/.m2/settings.xml
+
 
 #Jenkins config such as user configuration
 COPY config/jenkinsconfig.groovy /usr/share/jenkins/ref/init.groovy.d/jenkinsconfig.groovy
