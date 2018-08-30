@@ -5,6 +5,18 @@ folder(basePath) {
     description 'This Jobs are Running all PSE Project Jobs'
 }
 
+buildPipelineView('project-A') {
+    filterBuildQueue()
+    filterExecutors()
+    title('Project A CI Pipeline')
+    displayedBuilds(5)
+    selectedJob('project-A-compile')
+    alwaysAllowManualTrigger()
+    showPipelineParameters()
+    refreshFrequency(60)
+}
+
+
 //Does the Docu Job--also java doc ??
 
 job("$basePath/Maven-PSE-Documentation") {
